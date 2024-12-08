@@ -1,0 +1,44 @@
+// Tailwind
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Tailwind
+
+// Colors
+
+.bg-color-2 {
+  background: #2c2c2c;
+}
+
+// Colors
+
+// Reboot
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #222222;
+}
+
+::-webkit-scrollbar {
+  width: 0.7vw;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #171717;
+  &:hover {
+    background-color: #313131;
+    border-radius: 15px;
+  }
+}
+
+// Reboot
