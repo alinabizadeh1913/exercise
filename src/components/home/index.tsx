@@ -9,6 +9,7 @@ import Modal from "../layout/components/modal";
 import Last from "../layout/components/last";
 import { BreakLoop } from "@/src/utils/break";
 import { Continue } from "@/src/utils/continue";
+import { Script } from "@/src/utils/script";
 
 const HomeComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -18,13 +19,16 @@ const HomeComponent = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"error" | "success" | "text">();
+  const [statusText, setStatusText] = useState<string>();
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(false);
+  const [text1, setText1] = useState<string>();
   const [information, setInformation] = useState<{
     username?: string;
     email?: string;
     password?: string;
   }>();
+
   const handleClick = () => {
     if (usernameInput.current) {
       if (usernameInput.current.value.length < 8) {
@@ -36,6 +40,7 @@ const HomeComponent = () => {
       }
     }
   };
+
   return (
     <>
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
@@ -51,14 +56,13 @@ const HomeComponent = () => {
               Login successful!
             </Typography>
           </div>
-        ) : (
+        ) : status == "text" ? (
           <div className="bg-[#ffffff] p-4 w-[400px] text-center rounded-md">
             <Typography color="#333333" className="text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-              pariatur vitae? Qui debitis consequuntur doloribus.
+              {statusText}
             </Typography>
           </div>
-        )}
+        ) : null}
       </Modal>
       <Section container space="medium">
         <div className="flex flex-col gap-y-2 items-center">
@@ -301,6 +305,93 @@ const HomeComponent = () => {
                   </div>
                 </div>
               )}
+            </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div className="flex flex-wrap justify-center">
+          <div className="w-3/12 px-2">
+            <First>
+              <div onClick={Script}>
+                <Button>Run Script</Button>
+              </div>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div className="flex flex-wrap justify-center items-center">
+          <div className="w-5/12 px-2">
+            <First>
+              <input
+                type="text"
+                className="bg-white p-2 outline-0 text-[#222222]"
+                onInput={(e) => {
+                  const { value } = e.currentTarget;
+                  setText1(value);
+                }}
+              />
+            </First>
+          </div>
+          <div className="w-5/12 px-2">
+            <Last>
+              <div className="flex flex-col items-center">
+                <div>
+                  <Typography>{text1}</Typography>
+                </div>
+                <div className="mt-2 flex flex-wrap gap-x-2 gap-y-2 justify-center">
+                  <div
+                    onClick={() => {
+                      setText1(text1?.toUpperCase());
+                    }}
+                  >
+                    <Button type="fill">To Uppercase</Button>
+                  </div>
+                  <div
+                    onClick={() => {
+                      setText1((text) => {
+                        return text?.toLowerCase();
+                      });
+                    }}
+                  >
+                    <Button type="fill">To Lowercase</Button>
+                  </div>
+                  <div
+                    onClick={() => {
+                      const search = prompt("Enter the text to be included");
+                      if (text1?.includes(String(search))) {
+                        setIsModalOpen(true);
+                        setStatus("text");
+                        setStatusText("Text is included");
+                      } else {
+                        setIsModalOpen(true);
+                        setStatus("text");
+                        setStatusText("Text is not included");
+                      }
+                    }}
+                  >
+                    <Button type="fill">Includes</Button>
+                  </div>
+                  <div
+                    onClick={() => {
+                      const firstIndex = prompt("Enter the first index");
+                      const lastIndex = prompt("Enter the last index");
+
+                      const result = text1?.substr(
+                        Number(firstIndex),
+                        Number(lastIndex)
+                      );
+
+                      setIsModalOpen(true);
+                      setStatus("text");
+                      setStatusText(result);
+                    }}
+                  >
+                    <Button type="fill">Substr</Button>
+                  </div>
+                </div>
+              </div>
             </Last>
           </div>
         </div>
