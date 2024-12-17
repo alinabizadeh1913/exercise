@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../layout/components/button";
 import First from "../layout/components/first";
 import Typography from "../layout/components/typography";
@@ -10,6 +10,12 @@ import Last from "../layout/components/last";
 import { BreakLoop } from "@/src/utils/break";
 import { Continue } from "@/src/utils/continue";
 import { Script } from "@/src/utils/script";
+import Menu from "../layout/menu";
+import {
+  animatedOnScroll2,
+  animationOnScroll,
+  handleLinkStatusByScroll,
+} from "@/src/utils/scroll";
 
 const HomeComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -22,6 +28,7 @@ const HomeComponent = () => {
   const [statusText, setStatusText] = useState<string>();
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isDisable, setIsDisable] = useState<boolean>(false);
+  const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
   const [text1, setText1] = useState<string>();
   const [information, setInformation] = useState<{
     username?: string;
@@ -40,6 +47,12 @@ const HomeComponent = () => {
       }
     }
   };
+
+  useEffect(() => {
+    handleLinkStatusByScroll();
+    animationOnScroll();
+    animatedOnScroll2();
+  }, []);
 
   return (
     <>
@@ -64,6 +77,7 @@ const HomeComponent = () => {
           </div>
         ) : null}
       </Modal>
+      <Menu isShowMenu={isShowMenu} />
       <Section container space="medium">
         <div className="flex flex-col gap-y-2 items-center">
           <div className="w-6/12">
@@ -382,7 +396,6 @@ const HomeComponent = () => {
                         Number(firstIndex),
                         Number(lastIndex)
                       );
-
                       setIsModalOpen(true);
                       setStatus("text");
                       setStatusText(result);
@@ -390,9 +403,387 @@ const HomeComponent = () => {
                   >
                     <Button type="fill">Substr</Button>
                   </div>
+                  <div
+                    onClick={() => {
+                      const targetText = prompt("Enter the target text");
+                      const changeText = prompt("Enter the change text");
+                      setText1(
+                        text1?.replace(String(targetText), String(changeText))
+                      );
+                    }}
+                  >
+                    <Button type="fill">Replace</Button>
+                  </div>
                 </div>
               </div>
             </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div className="flex justify-center">
+          <div className="w-1/3">
+            <First>
+              <div onClick={() => setIsShowMenu(!isShowMenu)}>
+                <Button>{!isShowMenu ? "Show Menu" : "Hide Menu"}</Button>
+              </div>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div id="section1" className="section flex justify-center">
+          <div className="w-8/12 flex flex-col gap-y-4">
+            <First>
+              <Typography>Section 1</Typography>
+            </First>
+            <Last>
+              <Typography>
+                ist the Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Pariatur ab commodi qui est reiciendis rem quasi, optio aut,
+                fugit minima, quis sit non deserunt tempore! Ducimus laborum
+                accusantium a voluptatem harum veniam deleniti fugit rerum rem
+                doloremque quis quod veritatis nisi, esse dolore, in pariatur
+                eum voluptatibus ullam quidem obcaecati est. Voluptates quas
+                asperiores obcaecati expedita ad enim molestias nesciunt
+                provident nemo atque, voluptatem illo velit quae fugiat
+                doloremque pariatur commodi animi non et dicta delectus officia
+                recusandae. Similique recusandae laboriosam odit, molestias
+                incidunt provident architecto ea, pariatur eos cum corporis.
+                Impedit sed, rerum quibusdam explicabo eveniet sequi repudiandae
+                officiis velit nobis soluta exercitationem atque non dolore qui
+                vitae. Eligendi ratione facere ipsam ipsum minus labore mollitia
+                eius, deserunt fuga iste! Possimus libero tenetur culpa officiis
+                alias quasi cumque incidunt odit veniam esse iste nam, maxime
+                deserunt ex beatae distinctio sit repellendus quisquam
+                temporibus iusto explicabo! Asperiores provident iusto suscipit
+                aut blanditiis, impedit illum non corrupti quas aspernatur odit
+                dolorem excepturi deleniti neque sed atque, modi quidem quod
+                pariatur at. Libero doloremque, eos porro dolorem rem, fugit
+                omnis magnam quisquam voluptas enim iste exercitationem animi
+                optio ipsa illo esse quidem, odit amet? Modi alias ex eum iste
+                laborum! Nihil, sit voluptatem. Inventore repudiandae magnam
+                nisi laboriosam esse vitae voluptatibus nostrum, facilis unde
+                pariatur hic necessitatibus recusandae soluta numquam vel
+                perferendis possimus repellendus ab cumque cum, ducimus
+                reprehenderit! Asperiores veritatis, vero magnam commodi error
+                facilis, est ipsa voluptatibus quae neque quos iste repellendus
+                maxime, dolore cupiditate cum vel porro corporis blanditiis?
+                recusandae soluta numquam vel perferendis possimus repellendus
+                ab cumque cum, ducimus reprehenderit! Asperiores verit Lorem
+                ipsum dolor sit, amet consectetur adipisicing elit. Aliquid nisi
+                delectus cupiditate sapiente nostrum totam reiciendis quae
+                placeat aperiam. Maxime itaque sint molestiae, aliquam iusto
+                libero placeat maiores amet? Architecto fugiat beatae voluptates
+                porro soluta ipsa nisi dolorem? Laudantium illum voluptatem sit
+                odio fugiat quo delectus aut neque nulla aperiam autem maxime in
+                dolorum maiores enim quisquam minus molestiae laborum, labore
+                sunt mollitia rem deleniti, ipsum rerum. Neque expedita magni
+                ad, rerum velit dignissimos. Deleniti fugit voluptate tenetur
+                adipisci, id ratione aut in aliquid iusto, cum dolorem
+                laboriosam voluptas atque. Fugiat quis, maiores accusamus quas,
+                quae incidunt quaerat ex aut saepe ipsum nulla omnis. Reiciendis
+                provident excepturi, recusandae, quam illum unde est facere
+                assumenda, sequi corporis iste accusamus? Impedit, iste expedita
+                laborum harum ut cum.
+              </Typography>
+            </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div id="section2" className="section flex justify-center">
+          <div className="w-8/12 flex flex-col gap-y-4">
+            <First>
+              <Typography>Section 2</Typography>
+            </First>
+            <Last>
+              <Typography>
+                commodi animi non et dicta delectus officia recusandae.
+                Similique recusandae laboriosam odit, molestias incidunt
+                provident archit Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Hic rerum magnam doloremque libero neque ipsam
+                sapiente dolor provident nihil, ducimus cumque, tenetur
+                veritatis quisquam rem itaque. Laborum earum neque quaerat.
+                Corporis, tenetur saepe? Non facilis totam dignissimos officia
+                ratione repellendus dicta dolore, commodi adipisci! Possimus
+                eligendi voluptates, omnis nisi, distinctio sit ea doloribus
+                labore harum ut qui quas incidunt. Et sequi illo necessitatibus
+                neque asperiores ullam aut perferendis sed tempore? Quo magnam
+                nobis quis earum consequuntur fugiat est dolore quos voluptates
+                ipsum voluptatibus architecto odit animi reiciendis sint, nemo
+                ex possimus incidunt esse maiores ratione explicabo minus!
+                Aliquam, similique, earum quae qui repudiandae, nesciunt magnam
+                labore obcaecati laborum necessitatibus alias doloribus? Nostrum
+                ipsam explicabo est sunt quia quo, nesciunt nisi porro
+                reprehenderit temporibus officia recusandae nobis esse corrupti
+                modi suscipit quae commodi ea facere sint? recusandae soluta
+                numquam vel perferendis possimus repellendus ab cumque cum,
+                ducimus reprehenderit! Asperiores verit Lorem ipsum dolor sit,
+                amet consectetur adipisicing elit. Aliquid nisi delectus
+                cupiditate sapiente nostrum totam reiciendis quae placeat
+                aperiam. Maxime itaque sint molestiae, aliquam iusto libero
+                placeat maiores amet? Architecto fugiat beatae voluptates porro
+                soluta ipsa nisi dolorem? Laudantium illum voluptatem sit odio
+                fugiat quo delectus aut neque nulla aperiam autem maxime in
+                dolorum maiores enim quisquam minus molestiae laborum, labore
+                sunt mollitia rem deleniti, ipsum rerum. Neque expedita magni
+                ad, rerum velit dignissimos. Deleniti fugit voluptate tenetur
+                adipisci, id ratione aut in aliquid iusto, cum dolorem
+                laboriosam voluptas atque. Fugiat quis, maiores accusamus quas,
+                quae incidunt quaerat ex aut saepe ipsum nulla omnis. Reiciendis
+                provident excepturi, recusandae, quam illum unde est facere
+                assumenda, sequi corporis iste accusamus? Impedit, iste expedita
+                laborum harum ut cum.
+              </Typography>
+            </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div id="section3" className="section flex justify-center">
+          <div className="w-8/12 flex flex-col gap-y-4">
+            <First>
+              <Typography>Section 3</Typography>
+            </First>
+            <Last>
+              <Typography>
+                tque, modi quidem quod pariatur at. Libero doloremque, eos porro
+                dolorem rem, fugit omnis magnam quisquam voluptas enim iste
+                exercitationem animi optio ipsa illo esse quidem, odit amet?
+                Modi Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quos vero facere quidem. Ducimus eius mollitia incidunt quos,
+                nihil et ipsum natus? Nisi numquam vitae doloribus sed
+                temporibus quasi possimus est hic quaerat earum molestiae, optio
+                sit delectus voluptate nulla officiis eligendi fugit sapiente,
+                neque quam repellat magnam ipsum. Iusto, maiores. Cupiditate
+                quis ut debitis tenetur atque reiciendis non earum itaque
+                quibusdam. Necessitatibus cumque amet minima sequi quae, eos
+                quos facere reprehenderit error, cum, harum nemo corporis.
+                Eligendi, tempore est! Consequuntur unde voluptatum placeat
+                sapiente nam nisi aliquid ea perferendis illo? At commodi magni
+                eligendi, inventore quasi nobis iusto tempore? Optio, nam
+                mollitia obcaecati voluptatem, at officiis provident dicta
+                aliquam odit a dolore quam cum natus. Asperiores atque quis quia
+                illum? recusandae soluta numquam vel perferendis possimus
+                repellendus ab cumque cum, ducimus reprehenderit! Asperiores
+                verit Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Aliquid nisi delectus cupiditate sapiente nostrum totam
+                reiciendis quae placeat aperiam. Maxime itaque sint molestiae,
+                aliquam iusto libero placeat maiores amet? Architecto fugiat
+                beatae voluptates porro soluta ipsa nisi dolorem? Laudantium
+                illum voluptatem sit odio fugiat quo delectus aut neque nulla
+                aperiam autem maxime in dolorum maiores enim quisquam minus
+                molestiae laborum, labore sunt mollitia rem deleniti, ipsum
+                rerum. Neque expedita magni ad, rerum velit dignissimos.
+                Deleniti fugit voluptate tenetur adipisci, id ratione aut in
+                aliquid iusto, cum dolorem laboriosam voluptas atque. Fugiat
+                quis, maiores accusamus quas, quae incidunt quaerat ex aut saepe
+                ipsum nulla omnis. Reiciendis provident excepturi, recusandae,
+                quam illum unde est facere assumenda, sequi corporis iste
+                accusamus? Impedit, iste expedita laborum harum ut cum.
+              </Typography>
+            </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div id="section4" className="section flex justify-center">
+          <div className="w-8/12 flex flex-col gap-y-4">
+            <First>
+              <Typography>Section 4</Typography>
+            </First>
+            <Last>
+              <Typography>
+                illo velit quae fugiat doloremque pariatur commodi animi non et
+                dicta delectus officia recusandae. Similique recusandae labo
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure,
+                ab! Dolorem tempora laboriosam recusandae provident, repellendus
+                aliquam minima ipsum accusantium eum iusto voluptatum ipsa
+                quidem odio consequatur veritatis, nemo reprehenderit obcaecati!
+                Ullam eligendi neque ea rerum pariatur consequatur explicabo
+                ipsa minus itaque magni inventore reprehenderit aliquam expedita
+                maxime non veniam, quo quis perferendis et error nesciunt
+                incidunt ut culpa at. Cum iste molestias alias nostrum quos
+                fugit rem atque, aliquam dolore, sint labore doloremque itaque
+                omnis deserunt nemo vitae laboriosam nisi ipsam. Eum quibusdam
+                cumque quasi nulla, hic quo amet exercitationem dolores aperiam
+                iusto deserunt ad quos pariatur ratione debitis deleniti!
+                Tempore libero voluptatibus rerum laudantium ab, aperiam animi
+                illum neque iure possimus beatae corrupti ipsam tempora ipsum
+                eligendi dolorum suscipit, dicta reiciendis repellat? Unde velit
+                pariatur laudantium voluptas optio. recusandae soluta numquam
+                vel perferendis possimus repellendus ab cumque cum, ducimus
+                reprehenderit! Asperiores verit Lorem ipsum dolor sit, amet
+                consectetur adipisicing elit. Aliquid nisi delectus cupiditate
+                sapiente nostrum totam reiciendis quae placeat aperiam. Maxime
+                itaque sint molestiae, aliquam iusto libero placeat maiores
+                amet? Architecto fugiat beatae voluptates porro soluta ipsa nisi
+                dolorem? Laudantium illum voluptatem sit odio fugiat quo
+                delectus aut neque nulla aperiam autem maxime in dolorum maiores
+                enim quisquam minus molestiae laborum, labore sunt mollitia rem
+                deleniti, ipsum rerum. Neque expedita magni ad, rerum velit
+                dignissimos. Deleniti fugit voluptate tenetur adipisci, id
+                ratione aut in aliquid iusto, cum dolorem laboriosam voluptas
+                atque. Fugiat quis, maiores accusamus quas, quae incidunt
+                quaerat ex aut saepe ipsum nulla omnis. Reiciendis provident
+                excepturi, recusandae, quam illum unde est facere assumenda,
+                sequi corporis iste accusamus? Impedit, iste expedita laborum
+                harum ut cum.
+              </Typography>
+            </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div id="section5" className="section flex justify-center">
+          <div className="w-8/12 flex flex-col gap-y-4">
+            <First>
+              <Typography>Section 5</Typography>
+            </First>
+            <Last>
+              <Typography>
+                recusandae soluta numquam vel perferendis possimus repellendus
+                ab cumque cum, ducimus reprehenderit! Asperiores verit Lorem
+                ipsum dolor sit, amet consectetur adipisicing elit. Aliquid nisi
+                delectus cupiditate sapiente nostrum totam reiciendis quae
+                placeat aperiam. Maxime itaque sint molestiae, aliquam iusto
+                libero placeat maiores amet? Architecto fugiat beatae voluptates
+                porro soluta ipsa nisi dolorem? Laudantium illum voluptatem sit
+                odio fugiat quo delectus aut neque nulla aperiam autem maxime in
+                dolorum maiores enim quisquam minus molestiae laborum, labore
+                sunt mollitia rem deleniti, ipsum rerum. Neque expedita magni
+                ad, rerum velit dignissimos. Deleniti fugit voluptate tenetur
+                adipisci, id ratione aut in aliquid iusto, cum dolorem
+                laboriosam voluptas atque. Fugiat quis, maiores accusamus quas,
+                quae incidunt quaerat ex aut saepe ipsum nulla omnis. Reiciendis
+                provident excepturi, recusandae, quam illum unde est facere
+                assumenda, sequi corporis iste accusamus? Impedit, iste expedita
+                laborum harum ut cum. recusandae soluta numquam vel perferendis
+                possimus repellendus ab cumque cum, ducimus reprehenderit!
+                Asperiores verit Lorem ipsum dolor sit, amet consectetur
+                adipisicing elit. Aliquid nisi delectus cupiditate sapiente
+                nostrum totam reiciendis quae placeat aperiam. Maxime itaque
+                sint molestiae, aliquam iusto libero placeat maiores amet?
+                Architecto fugiat beatae voluptates porro soluta ipsa nisi
+                dolorem? Laudantium illum voluptatem sit odio fugiat quo
+                delectus aut neque nulla aperiam autem maxime in dolorum maiores
+                enim quisquam minus molestiae laborum, labore sunt mollitia rem
+                deleniti, ipsum rerum. Neque expedita magni ad, rerum velit
+                dignissimos. Deleniti fugit voluptate tenetur adipisci, id
+                ratione aut in aliquid iusto, cum dolorem laboriosam voluptas
+                atque. Fugiat quis, maiores accusamus quas, quae incidunt
+                quaerat ex aut saepe ipsum nulla omnis. Reiciendis provident
+                excepturi, recusandae, quam illum unde est facere assumenda,
+                sequi corporis iste accusamus? Impedit, iste expedita laborum
+                harum ut cum.
+              </Typography>
+            </Last>
+          </div>
+        </div>
+      </Section>
+      <Section container space="medium">
+        <div className="flex justify-center">
+          <div className="w-1/2">
+            <First>
+              <Typography>Animation on scroll</Typography>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="large">
+        <div className="animation flex justify-center">
+          <div className="w-1/2">
+            <First>
+              <Typography className="text">Animation of 1</Typography>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="small">
+        <div className="animation flex justify-center">
+          <div className="w-1/2">
+            <First>
+              <Typography className="text">Animation of 2</Typography>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="small">
+        <div className="animation flex justify-center">
+          <div className="w-1/2">
+            <First>
+              <Typography className="text">Animation of 3</Typography>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="small">
+        <div className="animation flex justify-center">
+          <div className="w-1/2">
+            <First>
+              <Typography className="text">Animation of 4</Typography>
+            </First>
+          </div>
+        </div>
+      </Section>
+      <Section container space="large">
+        <div className="move move1 flex justify-center">
+          <div className="w-6/12">
+            <div className="flex gap-x-6">
+              <div className="flex flex-col gap-y-2">
+                <div className="circle w-[10px] h-[10px] bg-white rounded-full"></div>
+                <div className="line w-[10px] h-[0px] duration-700 rounded-full"></div>
+              </div>
+              <div className="content invisible opacity-0 duration-700 p-2 flex items-center justify-center">
+                <Typography>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolorum esse architecto quam consectetur? Magnam ullam
+                  mollitia officia quis facilis ad animi placeat neque?
+                  Inventore, nihil unde. Esse dolore quia magnam.
+                </Typography>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+      <Section container space="large">
+        <div className="move move2 flex justify-center">
+          <div className="w-6/12">
+            <div className="flex gap-x-6">
+              <div className="flex flex-col gap-y-2">
+                <div className="circle w-[10px] h-[10px] bg-white rounded-full"></div>
+                <div className="line w-[10px] h-[0px] duration-700 rounded-full"></div>
+              </div>
+              <div className="content invisible opacity-0 duration-700 p-2 flex items-center justify-center">
+                <Typography>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolorum esse architecto quam consectetur? Magnam ullam
+                  mollitia officia quis facilis ad animi placeat neque?
+                  Inventore, nihil unde. Esse dolore quia magnam.
+                </Typography>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+      <Section container space="large">
+        <div className="move move3 flex justify-center">
+          <div className="w-6/12">
+            <div className="flex gap-x-6">
+              <div className="flex flex-col gap-y-2">
+                <div className="circle w-[10px] h-[10px] bg-white rounded-full"></div>
+                <div className="line w-[10px] h-[0px] duration-700 rounded-full"></div>
+              </div>
+              <div className="content invisible opacity-0 duration-700 p-2 flex items-center justify-center">
+                <Typography>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolorum esse architecto quam consectetur? Magnam ullam
+                  mollitia officia quis facilis ad animi placeat neque?
+                  Inventore, nihil unde. Esse dolore quia magnam.
+                </Typography>
+              </div>
+            </div>
           </div>
         </div>
       </Section>

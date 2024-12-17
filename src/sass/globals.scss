@@ -37,8 +37,67 @@ body {
   background-color: #171717;
   &:hover {
     background-color: #313131;
-    border-radius: 15px;
   }
 }
 
 // Reboot
+
+#main-menu {
+  a {
+    transition: 0.313s ease;
+    .circle {
+      display: none;
+    }
+  }
+  a.active {
+    transform: translateY(-10px);
+    .circle {
+      display: block;
+    }
+  }
+}
+
+.animation {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  transition: all 0.6313s ease;
+  .text {
+    transition: all 1s ease;
+  }
+}
+
+.animation.active {
+  transform: translateY(0px) scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+
+.move1 {
+  .line,
+  .content {
+    background: linear-gradient(to bottom, rgba(34, 85, 250, 0.774), transparent);
+  }
+}
+.move2 {
+  .line,
+  .content {
+    background: linear-gradient(to bottom, #1eff17c0, transparent);
+  }
+}
+.move3 {
+  .line,
+  .content {
+    background: linear-gradient(to bottom, #40e9ffb6, transparent);
+  }
+}
+
+.move.active {
+  .line {
+    height: 200px;
+  }
+  .content {
+    visibility: visible;
+    opacity: 1;
+  }
+}

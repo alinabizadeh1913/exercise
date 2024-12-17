@@ -51,6 +51,14 @@ const Script = () => {
   data.slice(0, 3).forEach((item) => {
     console.log(item);
   });
+
+  const text = "apple | peach | banana | coconut | watermelon";
+
+  const fruits = text.split(" | ");
+
+  for (let index = 0; index < fruits.length; index++) {
+    alert(`fruit of ${index + 1} : ${fruits[index]}`);
+  }
 };
 
 export { Script };
