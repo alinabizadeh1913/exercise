@@ -16,6 +16,7 @@ import {
   animationOnScroll,
   handleLinkStatusByScroll,
 } from "@/src/utils/scroll";
+import Pagination from "./pagination";
 
 const HomeComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -787,7 +788,7 @@ const HomeComponent = () => {
           </div>
         </div>
       </Section>
-
+      <Pagination />
       <br />
       <br />
       <br />
