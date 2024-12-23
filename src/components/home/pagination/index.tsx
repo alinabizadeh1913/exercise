@@ -124,7 +124,7 @@ class Pagination extends Component<PaginationProps, PaginationState> {
   };
 
   handlePrevPage = () => {
-    if (this.state.currentPage > 0) {
+    if (this.state.currentPage > 1) {
       this.setState((prevState) => ({
         currentPage: prevState.currentPage - 1,
       }));
@@ -186,7 +186,11 @@ class Pagination extends Component<PaginationProps, PaginationState> {
                       className={`prev cursor-pointer`}
                       onClick={() => this.handlePrevPage()}
                     >
-                      <Typography>prev</Typography>
+                      <Typography
+                        className={currentPage == 1 ? "opacity-50" : ""}
+                      >
+                        prev
+                      </Typography>
                     </div>
                     <div className="numbers flex gap-x-4">
                       {Array(totalPage)

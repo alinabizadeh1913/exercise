@@ -17,6 +17,7 @@ import {
   handleLinkStatusByScroll,
 } from "@/src/utils/scroll";
 import Pagination from "./pagination";
+import Pagination2 from "./pagination2";
 
 const HomeComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -728,67 +729,21 @@ const HomeComponent = () => {
           </div>
         </div>
       </Section>
-      <Section container space="large">
-        <div className="move move1 flex justify-center">
-          <div className="w-6/12">
-            <div className="flex gap-x-6">
-              <div className="flex flex-col gap-y-2">
-                <div className="circle w-[10px] h-[10px] bg-white rounded-full"></div>
-                <div className="line w-[10px] h-[0px] duration-700 rounded-full"></div>
-              </div>
-              <div className="content invisible opacity-0 duration-700 p-2 flex items-center justify-center">
-                <Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolorum esse architecto quam consectetur? Magnam ullam
-                  mollitia officia quis facilis ad animi placeat neque?
-                  Inventore, nihil unde. Esse dolore quia magnam.
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-      <Section container space="large">
-        <div className="move move2 flex justify-center">
-          <div className="w-6/12">
-            <div className="flex gap-x-6">
-              <div className="flex flex-col gap-y-2">
-                <div className="circle w-[10px] h-[10px] bg-white rounded-full"></div>
-                <div className="line w-[10px] h-[0px] duration-700 rounded-full"></div>
-              </div>
-              <div className="content invisible opacity-0 duration-700 p-2 flex items-center justify-center">
-                <Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolorum esse architecto quam consectetur? Magnam ullam
-                  mollitia officia quis facilis ad animi placeat neque?
-                  Inventore, nihil unde. Esse dolore quia magnam.
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-      <Section container space="large">
-        <div className="move move3 flex justify-center">
-          <div className="w-6/12">
-            <div className="flex gap-x-6">
-              <div className="flex flex-col gap-y-2">
-                <div className="circle w-[10px] h-[10px] bg-white rounded-full"></div>
-                <div className="line w-[10px] h-[0px] duration-700 rounded-full"></div>
-              </div>
-              <div className="content invisible opacity-0 duration-700 p-2 flex items-center justify-center">
-                <Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolorum esse architecto quam consectetur? Magnam ullam
-                  mollitia officia quis facilis ad animi placeat neque?
-                  Inventore, nihil unde. Esse dolore quia magnam.
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
       <Pagination />
+      <Section container space="medium">
+        <div className="flex justify-center">
+          <div className="w-10/12">
+            <div className="flex flex-col gap-y-4">
+              <First>
+                <Typography>Pagination of 2</Typography>
+              </First>
+              <Last>
+                <Pagination2 />
+              </Last>
+            </div>
+          </div>
+        </div>
+      </Section>
       <br />
       <br />
       <br />
